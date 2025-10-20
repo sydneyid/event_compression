@@ -182,14 +182,14 @@
             <div class="is-size-5 publication-authors">
               <!-- TODO: Replace with your paper authors and their personal links -->
               <span class="author-block">
-                <a href="FIRST AUTHOR PERSONAL LINK" target="_blank">Antonio Junco de Haas</a><sup>*</sup>,</span>
+                <a href="https://www.linkedin.com/in/antonio-junco-de-haas-46247034b/" target="_blank">Antonio Junco de Haas</a>,</span>
                 <span class="author-block">
-                  <a href="SECOND AUTHOR PERSONAL LINK" target="_blank">Advisor: Sydney Dolan</a><sup>*</sup>,</span>
+                  <a href="https://sydneyidolan.com" target="_blank">Advisor: Sydney Dolan</a></span>
                   </div>
 
                   <div class="is-size-5 publication-authors">
                     <!-- TODO: Replace with your institution and conference/journal info -->
-                    <span class="author-block">Technical University of Munich<br>Conference name and year</span>
+                    <span class="author-block">Technical University of Munich<br>Ottobrunn, BY, DE</span>
                   </div>
 
                   <div class="column has-text-centered">
@@ -246,7 +246,7 @@
         <div class="content has-text-justified">
           <!-- TODO: Replace with your paper abstract -->
           <p>
-      This thesis dives into the details of the event camera lossless compression algorithm for the EventSat mission. EventSat is a Low Earth Orbit CubeSat mission that will utilize an Event camera to observe stars and satellites. These cameras only record changes in pixel brightness. At the time of writing, there are no event data compression algorithms that are optimized for space applications. The algorithm's objective is to minimize file size and maintain data integrity for downlink purposes. The algorithm compresses data with multiple strategies, namely delta, dictionary, and variable-length encoding. Histogram analysis automatically calculates optimal algorithm thresholds. Additional compression strategies, such as bit splicing and pair encoding, are also implemented. The compression ratio is up to $84\%$, surpassing generic compression algorithms. The algorithm is open-sourced to support further research.       </p>
+      This thesis dives into the details of the event camera lossless compression algorithm for the EventSat mission. EventSat is a Low Earth Orbit CubeSat mission that will utilize an Event camera to observe stars and satellites. These cameras only record changes in pixel brightness. At the time of writing, there are no event data compression algorithms that are optimized for space applications. The algorithm's objective is to minimize file size and maintain data integrity for downlink purposes. The algorithm compresses data with multiple strategies, namely delta, dictionary, and variable-length encoding. Histogram analysis automatically calculates optimal algorithm thresholds. Additional compression strategies, such as bit splicing and pair encoding, are also implemented. The compression ratio is up to 84%, surpassing generic compression algorithms. The algorithm is open-sourced to support further research.       </p>
         </div>
       </div>
     </div>
@@ -260,19 +260,37 @@
   <div class="container is-max-desktop content">
     <h2 class="title">Motivation</h2>
     <p>
-      Attitude sensors determine a spacecraft's orientation by sensing astronomical objects.
-      Among attitude sensors, sun sensors are the most widely used due to their simplicity,
-      low-power requirements, and the Sun's consistent visibility in space. Sun sensors estimate
-      the direction and position of the sun relative to the spacecraft. Their working principle
-      is shown in Figure 1.
+      There exist very few compression algorithms focused on the event data format. The file sizes produced by existing general-purpose compression techniques are fairly large. For a space-focused application, it would be ideal if the size were reduced further, as event cameras can generate millions of events in under a minute, which would take a significant amount of time to downlink. Furthermore, directly applying existing general-purpose compression algorithms is complicated because it may require fine-tuning the algorithm settings for the values recorded and observation length. If implemented as described above, development and execution would be time-consuming, and the mission would be reliant on third-party software. Additionally, these algorithms are not optimized for space applications, as they may prioritize execution speed rather than compression ratio or low-resource utilization.
+      </p>
+    <img src="./static/images/fundamental_obs.png"
+    class="center-image"
+    alt="Event pixel diagram. light hits the photoreceptor, which converts it to a voltage. voltage is carried to a change amplifier, which changes its intensity. Then the signal is carried to the comparatators, which convert input into events by comparing it against thresholds."
+    style="max-width: 80%; height: auto;"/> 
+    <p><b>Figure 1.</b> Event cameras possess high data rates and an asynchronous output, which can result in signficantly higher file sizes than traditional frame cameras. The event observation on the right illustrates this point, as the frame size is scaled to the size of event data file size relative to a frame camera .</p>
 
-      The performance of centroiding methods for sun sensing has plateaued due to limitations
-      in spatial resolution, optical blur, and susceptibility to noise. These constraints
-      limit the achievable accuracy of sun sensors with conventional CMOS detectors.
-      To address these challenges, we propose the use of event-based cameras for sun sensing.
-      We introduce a dataset and associated benchmark, <b>Sun-E</b>, to facilitate further work in this field.
-        </p>
-      </div>
+
+    <ul>
+    <li>
+        A novel event data compression algorithm that uses a hybrid dictionary and variable-length encoding strategies. 
+        The dictionary encoding approach categorizes the data by size and compresses it in a separate section from the rest of the file. 
+        The variable-length encoding approach integrates compression instructions, indicating size right next to the data.
+    </li>
+    <li>
+        A comprehensive trade-off histogram analysis to determine the optimal compression thresholds for dictionary and variable length. 
+        The algorithm calculates file sizes for each threshold until the minimum size is found.
+    </li>
+    <li>
+        Bit-splicing to reduce the amount of data padding present in standard-length integers. 
+        This strategy allows the algorithm to write information in files at the sub-byte level.
+    </li>
+    <li>
+        Low-resource algorithm architecture to limit memory and the number of operations on board and on the ground. 
+        The algorithm development considers that resources are limited and prioritizes efficient operations.
+    </li>
+</ul>
+
+<p>All data and code associated with this project are open source to facilitate further study.</p>
+    </div>
     </div>
   </div>
 </section>
@@ -339,13 +357,14 @@
     alt="Description . light hits the photoreceptor, which converts it to a voltage. voltage is carried to a change amplifier, which changes its intensity. Then the signal is carried to the comparatators, which convert input into events by comparing it against thresholds."
     style="max-width: 80%; height: auto;"/>  
   <p><b>Figure 5.</b> Results against other benchmarks.</p>
-
+  <p>The EventSat compression algorithm file [Bin] was smaller than the [Raw, Zip] files across all datasets. As such, the compression algorithm can be considered as a viable alternative to the commonplace compression algorithms. There are additional data procedures that will affect file size and downlink capabilities, such as packet headers and packet transmission management. Thus, the full downlink-observation ratio cannot be calculated within the scope of this thesis alone. </p>
 
   <img src="./static/images/ablation.png"
     class="center-image"
     alt="Description . light hits the photoreceptor, which converts it to a voltage. voltage is carried to a change amplifier, which changes its intensity. Then the signal is carried to the comparatators, which convert input into events by comparing it against thresholds."
     style="max-width: 80%; height: auto;"/>  
-  <p><b>Figure 5.</b> Results against other benchmarks.</p>
+  <p><b>Table 2.</b> Ablation study.</p>
+  <p>Table 2 shows the data format at each step of the event compression. In the first step, the data is transformed from characters to integers. Secondly, Dictionary encoding separates timestamps with more bytes and an additional <i>id</i> value. Variable Encoding further splits the Non-Dictionary events. However, due to the small difference in timestamp size, the events remain the same length in bytes. The final three strategies allow for events to be smaller in bits, rather than bytes, resulting in a significant size reduction. Event distribution refers to the percentage of events that are either dictionary, long, or short events. Filesize is the expected size of an observation with 6,000,000 recorded values.The combination of all the strategies in files that are approximately $20\%$ of the original file size. This result is due to the hybrid approach between the dictionary and variable-length encoding.</p>
 
 </div>
 </section>
@@ -378,12 +397,11 @@
           <span class="copy-text">Copy</span>
         </button>
       </div>
-      <pre id="bibtex-code"><code>@article{YourPaperKey2024,
-  title={Your Paper Title Here},
-  author={First Author and Second Author and Third Author},
-  journal={Conference/Journal Name},
-  year={2024},
-  url={https://your-domain.com/your-project-page}
+      <pre id="bibtex-code"><code>@article{event_compression,
+  title={Event Camera Lossless Compression for Satellite Applications},
+  author={Antonio Junco de Haas and Sydney Dolan},
+  year={2025},
+  url={https://sydneyid.github.io/event_compression/}
 }</code></pre>
     </div>
 </section>
