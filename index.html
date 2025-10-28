@@ -268,32 +268,34 @@
     style="display: block; margin: 0 auto; max-width: 80%; height: auto;"/> 
     <p><b>Figure 1.</b> Event cameras possess high data rates and an asynchronous output, which can result in signficantly higher file sizes than traditional frame cameras. The event observation on the right illustrates this point, as the frame size is scaled to the size of event data file size relative to a frame camera .</p>
 
-
-    <ul>
-    <li>
-        A novel event data compression algorithm that uses a hybrid dictionary and variable-length encoding strategies. 
-        The dictionary encoding approach categorizes the data by size and compresses it in a separate section from the rest of the file. 
-        The variable-length encoding approach integrates compression instructions, indicating size right next to the data.
-    </li>
-    <li>
-        A comprehensive trade-off histogram analysis to determine the optimal compression thresholds for dictionary and variable length. 
-        The algorithm calculates file sizes for each threshold until the minimum size is found.
-    </li>
-    <li>
-        Bit-splicing to reduce the amount of data padding present in standard-length integers. 
-        This strategy allows the algorithm to write information in files at the sub-byte level.
-    </li>
-    <li>
-        Low-resource algorithm architecture to limit memory and the number of operations on board and on the ground. 
-        The algorithm development considers that resources are limited and prioritizes efficient operations.
-    </li>
-</ul>
-
-<p>All data and code associated with this project are open source to facilitate further study.</p>
-    </div>
-    </div>
   </div>
 </section>
+
+<section class="section" id="Contributions">
+  <div class="container is-max-desktop content">
+    <h2 class="title">Contributions</h2>
+
+    <p>This thesis makes the following contributions:</p>
+
+    <ul>
+      <li>
+        A novel event data compression algorithm that uses a hybrid dictionary and variable-length encoding strategy. 
+        The dictionary encoding approach categorizes the data by size and compresses it in a separate section from the rest of the file. 
+        The variable-length encoding approach integrates compression instructions, indicating size right next to the data. 
+        Bit-splicing is used to reduce the amount of data padding present in standard-length integers. 
+        This strategy allows the algorithm to write information in files at the sub-byte level.
+      </li>
+
+      <li>
+        A comprehensive trade-off histogram analysis to determine the optimal compression thresholds for dictionary and variable length encoding. 
+        The algorithm calculates file sizes for each threshold until the minimum size is found.
+      </li>
+    </ul>
+
+    <p>All data and code associated with this project are open source to facilitate further study.</p>
+  </div>
+</section>
+
 
 
 
