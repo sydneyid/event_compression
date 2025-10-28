@@ -265,7 +265,7 @@
     <img src="./static/images/fundamental_obs.png"
     class="center-image"
     alt="Side by side comaprison of frame camera image and event camera images."
-    style="display: block; margin: 0 auto; max-width: 40%; height: auto;"/> 
+    style="display: block; margin: 0 auto; max-width: 80%; height: auto;"/> 
     <p><b>Figure 1.</b> Event cameras possess high data rates and an asynchronous output, which can result in signficantly higher file sizes than traditional frame cameras. The event observation on the right illustrates this point, as the frame size is scaled to the size of event data file size relative to a frame camera .</p>
 
 
@@ -302,12 +302,13 @@
   <div class="container is-max-desktop content">
   <h2 class="title">What are event cameras?</h2>
   <p> Event-based vision is an alternative framework within visual sensing that pulls inspiration from the human visual system’s capability to detect and respond to motion changes in the environment. the vision system receives visual input asynchronously and transports this input to the visual cortex for processing. Cells in the retinal, composed of photoreceptors, bipolar cells, and ganglion cells, work together to detect changes in light intensity and motion. This biological system has inspired the development of event cameras, which operate on a similar principle.</p>
+  <figure style="text-align: center;"></figure>
   <img src="./static/images/event_pixel_old_design.png"
     class="center-image"
     alt="Event pixel diagram. light hits the photoreceptor, which converts it to a voltage. voltage is carried to a change amplifier, which changes its intensity. Then the signal is carried to the comparatators, which convert input into events by comparing it against thresholds."
-    style="display: block; margin: 0 auto; max-width: 40%; height: auto;"/> 
-  <p><b>Figure 2.</b> Event cameras mimic the structure of retinal cells by using pixels that independently convert light into voltage signals, responding to changes in brightness detected at each pixel.</p>
-
+    style="display: block; margin: 0 auto; max-width: 80%; height: auto;"/> 
+    <figcaption><b>Figure 2.</b> Event cameras mimic the structure of retinal cells by using pixels that independently convert light into voltage signals, responding to changes in brightness detected at each pixel.</figcaption>
+</figure>
   <p>Events are read off a chip in the format <i>(t,x,y,p)</i> which includes the pixel's <i>xy</i> address on the pixel array, the polarity <i>(p)</i> of the change (ON or OFF) and a microsecond timestamp <i>(t)</i>. Together, the thousands of pixels in an event camera represent a dynamic view of the scene. The asynchronous update of each pixel occurs at an exceptionally high temporal resolution, enabling these cameras to adeptly capture fast-moving objects and dynamic scenes without the motion blur typically associated with frame cameras. Another key benefit of this class of camera is its ability to measure light intensity differences. Similar to the human eye, the event camera detects changes on a logarithmic scale, rather than with absolute values. This allows it to handle a wide range of lighting conditions effectively, avoiding common issues like overexposure or underexposure encountered with traditional frame camera systems. This adaptability is particularly valuable in environments with challenging lighting conditions like space. 
   </p>
 
@@ -340,7 +341,7 @@
   <img src="./static/images/Algorithm_Description.png"
     class="center-image"
     alt="Description . light hits the photoreceptor, which converts it to a voltage. voltage is carried to a change amplifier, which changes its intensity. Then the signal is carried to the comparatators, which convert input into events by comparing it against thresholds."
-    style="display: block; margin: 0 auto; max-width: 40%; height: auto;"/> 
+    style="display: block; margin: 0 auto; max-width: 80%; height: auto;"/> 
   <p><b>Figure 4.</b> Algorithm Description.</p>
 </div>
 </section>
@@ -354,15 +355,16 @@
 <img src="./static/images/event_compression_plot.png"
     class="center-image"
     alt="Description . bar chart across three scenes. ."
-    style="max-width: 80%; height: auto;"/>  
+    style="display: block; margin: 0 auto; max-width: 60%; height: auto;"/>  
   <p><b>Figure 5.</b> Results against other benchmarks.</p>
   <p>Our compression algorithm file [Bin] was smaller than the [Raw, Zip] files across all datasets. As such, the compression algorithm can be considered as a viable alternative to the commonplace compression algorithms. There are additional data procedures that will affect file size and downlink capabilities, such as packet headers and packet transmission management. Thus, the full downlink-observation ratio in a satellite mission cannot be calculated within the scope of this work alone. </p>
-
+ <figure style="text-align: center;"></figure>
   <img src="./static/images/ablation.png"
     class="center-image"
     alt="Description . abaltion study of where each element and the resultant compression is calcualted."
     style="display: block; margin: 0 auto; max-width: 40%; height: auto;"/>  
   <figcaption><b>Table 2.</b> Ablation study.</figcaption>
+  </figure>
   <p>Table 2 shows the data format at each step of the event compression. In the first step, the data is transformed from characters to integers. Secondly, Dictionary encoding separates timestamps with more bytes and an additional <i>id</i> value. Variable Encoding further splits the Non-Dictionary events. However, due to the small difference in timestamp size, the events remain the same length in bytes. The final three strategies allow for events to be smaller in bits, rather than bytes, resulting in a significant size reduction. Event distribution refers to the percentage of events that are either dictionary, long, or short events. Filesize is the expected size of an observation with 6,000,000 recorded values.The combination of all the strategies in files that are approximately 20% of the original file size. This result is due to the hybrid approach between the dictionary and variable-length encoding.</p>
 
 </div>
