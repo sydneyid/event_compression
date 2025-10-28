@@ -264,8 +264,8 @@
       </p>
     <img src="./static/images/fundamental_obs.png"
     class="center-image"
-    alt="Event pixel diagram. light hits the photoreceptor, which converts it to a voltage. voltage is carried to a change amplifier, which changes its intensity. Then the signal is carried to the comparatators, which convert input into events by comparing it against thresholds."
-    style="max-width: 80%; height: auto;"/> 
+    alt="Side by side comaprison of frame camera image and event camera images."
+    style="display: block; margin: 0 auto; max-width: 40%; height: auto;"/> 
     <p><b>Figure 1.</b> Event cameras possess high data rates and an asynchronous output, which can result in signficantly higher file sizes than traditional frame cameras. The event observation on the right illustrates this point, as the frame size is scaled to the size of event data file size relative to a frame camera .</p>
 
 
@@ -305,7 +305,7 @@
   <img src="./static/images/event_pixel_old_design.png"
     class="center-image"
     alt="Event pixel diagram. light hits the photoreceptor, which converts it to a voltage. voltage is carried to a change amplifier, which changes its intensity. Then the signal is carried to the comparatators, which convert input into events by comparing it against thresholds."
-    style="max-width: 80%; height: auto;"/>  
+    style="display: block; margin: 0 auto; max-width: 40%; height: auto;"/> 
   <p><b>Figure 2.</b> Event cameras mimic the structure of retinal cells by using pixels that independently convert light into voltage signals, responding to changes in brightness detected at each pixel.</p>
 
   <p>Events are read off a chip in the format <i>(t,x,y,p)</i> which includes the pixel's <i>xy</i> address on the pixel array, the polarity <i>(p)</i> of the change (ON or OFF) and a microsecond timestamp <i>(t)</i>. Together, the thousands of pixels in an event camera represent a dynamic view of the scene. The asynchronous update of each pixel occurs at an exceptionally high temporal resolution, enabling these cameras to adeptly capture fast-moving objects and dynamic scenes without the motion blur typically associated with frame cameras. Another key benefit of this class of camera is its ability to measure light intensity differences. Similar to the human eye, the event camera detects changes on a logarithmic scale, rather than with absolute values. This allows it to handle a wide range of lighting conditions effectively, avoiding common issues like overexposure or underexposure encountered with traditional frame camera systems. This adaptability is particularly valuable in environments with challenging lighting conditions like space. 
@@ -340,7 +340,7 @@
   <img src="./static/images/Algorithm_Description.png"
     class="center-image"
     alt="Description . light hits the photoreceptor, which converts it to a voltage. voltage is carried to a change amplifier, which changes its intensity. Then the signal is carried to the comparatators, which convert input into events by comparing it against thresholds."
-    style="max-width: 80%; height: auto;"/>  
+    style="display: block; margin: 0 auto; max-width: 40%; height: auto;"/> 
   <p><b>Figure 4.</b> Algorithm Description.</p>
 </div>
 </section>
@@ -362,7 +362,7 @@
     class="center-image"
     alt="Description . abaltion study of where each element and the resultant compression is calcualted."
     style="display: block; margin: 0 auto; max-width: 40%; height: auto;"/>  
-  <p><b>Table 2.</b> Ablation study.</p>
+  <figcaption><b>Table 2.</b> Ablation study.</figcaption>
   <p>Table 2 shows the data format at each step of the event compression. In the first step, the data is transformed from characters to integers. Secondly, Dictionary encoding separates timestamps with more bytes and an additional <i>id</i> value. Variable Encoding further splits the Non-Dictionary events. However, due to the small difference in timestamp size, the events remain the same length in bytes. The final three strategies allow for events to be smaller in bits, rather than bytes, resulting in a significant size reduction. Event distribution refers to the percentage of events that are either dictionary, long, or short events. Filesize is the expected size of an observation with 6,000,000 recorded values.The combination of all the strategies in files that are approximately 20% of the original file size. This result is due to the hybrid approach between the dictionary and variable-length encoding.</p>
 
 </div>
