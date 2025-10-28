@@ -6,13 +6,13 @@
   
   <!-- Primary Meta Tags -->
   <!-- TODO: Replace with your paper title and author names -->
-  <meta name="title" content="PAPER_TITLE - AUTHOR_NAMES">
+  <meta name="title" content="Event Camera Lossless Compression for Satellite Applications">
   <!-- TODO: Write a compelling 150-160 character description of your research -->
-  <meta name="description" content="BRIEF_DESCRIPTION_OF_YOUR_RESEARCH_CONTRIBUTION_AND_FINDINGS">
+  <meta name="description" content="This paper presents a novel approach to lossless compression of event camera data for satellite applications, achieving significant reductions in data size without loss of information.">
   <!-- TODO: Add 5-10 relevant keywords for your research area -->
-  <meta name="keywords" content="KEYWORD1, KEYWORD2, KEYWORD3, machine learning, computer vision, AI">
+  <meta name="keywords" content="event camera, machine learning, compression">
   <!-- TODO: List all authors -->
-  <meta name="author" content="FIRST_AUTHOR_NAME, SECOND_AUTHOR_NAME">
+  <meta name="author" content="Antonio Junco de Haas">
   <meta name="robots" content="index, follow">
   <meta name="language" content="English">
   
@@ -114,14 +114,14 @@
       },
       {
         "@type": "Person",
-        "name": "SECOND_AUTHOR_NAME",
+        "name": "Supervisor: Sydney Dolan",
         "affiliation": {
           "@type": "Organization",
-          "name": "INSTITUTION_NAME"
+          "name": "Technical University of Munich"
         }
       }
     ],
-    "datePublished": "2024-01-01",
+    "datePublished": "2025-10-20",
     "publisher": {
       "@type": "Organization",
       "name": "CONFERENCE_OR_JOURNAL_NAME"
@@ -246,7 +246,7 @@
         <div class="content has-text-justified">
           <!-- TODO: Replace with your paper abstract -->
           <p>
-      This thesis dives into the details of the event camera lossless compression algorithm for the EventSat mission. EventSat is a Low Earth Orbit CubeSat mission that will utilize an Event camera to observe stars and satellites. These cameras only record changes in pixel brightness. At the time of writing, there are no event data compression algorithms that are optimized for space applications. The algorithm's objective is to minimize file size and maintain data integrity for downlink purposes. The algorithm compresses data with multiple strategies, namely delta, dictionary, and variable-length encoding. Histogram analysis automatically calculates optimal algorithm thresholds. Additional compression strategies, such as bit splicing and pair encoding, are also implemented. The compression ratio is up to 84%, surpassing generic compression algorithms. The algorithm is open-sourced to support further research.       </p>
+        This thesis dives into the details of the event camera lossless compression algorithm for the EventSat mission. EventSat is a Low Earth Orbit CubeSat mission that will utilize an Event camera to observe stars and satellites. These cameras only record changes in pixel brightness. At the time of writing, there are no event data compression algorithms that are optimized for space applications. The algorithm's objective is to minimize file size and maintain data integrity for downlink purposes. The algorithm compresses data with multiple strategies, namely delta, dictionary, and variable-length encoding. Histogram analysis automatically calculates optimal algorithm thresholds. Additional compression strategies, such as bit splicing and pair encoding, are also implemented. The compression ratio is up to 84%, surpassing generic compression algorithms. The algorithm is open-sourced to support further research.       </p>
         </div>
       </div>
     </div>
@@ -256,7 +256,7 @@
 
 
 <!--/ Motivation. -->
-<section class="section" id="Background">
+<section class="section" id="Motivation">
   <div class="container is-max-desktop content">
     <h2 class="title">Motivation</h2>
     <p>
@@ -333,38 +333,37 @@
 
 
 <!--/ Backgroundn. -->
-<section class="section" id="Eventcamera_Description">
+<section class="section" id="Method_description">
   <div class="container is-max-desktop content">
   <h2 class="title">How does this method work?</h2>
-  <p> Event-based vision is an alternative framework within visual sensing that pulls inspiration from the human visual system’s capability to detect and respond to motion changes in the environment. the vision system receives visual input asynchronously and transports this input to the visual cortex for processing. Cells in the retinal, composed of photoreceptors, bipolar cells, and ganglion cells, work together to detect changes in light intensity and motion. This biological system has inspired the development of event cameras, which operate on a similar principle.</p>
-    <img src="./static/images/Algorithm_Description.png"
+  <p> Our algorithm, shown here, takes this input event data, and applies a delta encoding scheme for the timestamp, and a pair encoding scheme for the other event elements. To further compress the data, a combination of dictionary encoding and variable length encoding approaches are used. Then, finally, the data is written into bits rather than bytes, to produce a compressed bin file.</p>
+  <img src="./static/images/Algorithm_Description.png"
     class="center-image"
     alt="Description . light hits the photoreceptor, which converts it to a voltage. voltage is carried to a change amplifier, which changes its intensity. Then the signal is carried to the comparatators, which convert input into events by comparing it against thresholds."
     style="max-width: 80%; height: auto;"/>  
   <p><b>Figure 4.</b> Algorithm Description.</p>
-
 </div>
 </section>
 
 
 <!--/ Backgroundn. -->
-<section class="section" id="Eventcamera_Description">
+<section class="section" id="Results">
   <div class="container is-max-desktop content">
   <h2 class="title">How does our method stack up?</h2>
-  <p> Event-based vision is an alternative framework within visual sensing that pulls inspiration from the human visual system’s capability to detect and respond to motion changes in the environment. the vision system receives visual input asynchronously and transports this input to the visual cortex for processing. Cells in the retinal, composed of photoreceptors, bipolar cells, and ganglion cells, work together to detect changes in light intensity and motion. This biological system has inspired the development of event cameras, which operate on a similar principle.</p>
-<img src="./static/images/Chart_Results.png"
+  <p> Across all scenarios tested, our method achieves a compression ratio of 85%.</p>
+<img src="./static/images/event_compression_plot.png
     class="center-image"
-    alt="Description . light hits the photoreceptor, which converts it to a voltage. voltage is carried to a change amplifier, which changes its intensity. Then the signal is carried to the comparatators, which convert input into events by comparing it against thresholds."
+    alt="Description . bar chart across three scenes. ."
     style="max-width: 80%; height: auto;"/>  
   <p><b>Figure 5.</b> Results against other benchmarks.</p>
-  <p>The EventSat compression algorithm file [Bin] was smaller than the [Raw, Zip] files across all datasets. As such, the compression algorithm can be considered as a viable alternative to the commonplace compression algorithms. There are additional data procedures that will affect file size and downlink capabilities, such as packet headers and packet transmission management. Thus, the full downlink-observation ratio cannot be calculated within the scope of this thesis alone. </p>
+  <p>Our compression algorithm file [Bin] was smaller than the [Raw, Zip] files across all datasets. As such, the compression algorithm can be considered as a viable alternative to the commonplace compression algorithms. There are additional data procedures that will affect file size and downlink capabilities, such as packet headers and packet transmission management. Thus, the full downlink-observation ratio in a satellite mission cannot be calculated within the scope of this work alone. </p>
 
   <img src="./static/images/ablation.png"
     class="center-image"
     alt="Description . light hits the photoreceptor, which converts it to a voltage. voltage is carried to a change amplifier, which changes its intensity. Then the signal is carried to the comparatators, which convert input into events by comparing it against thresholds."
     style="max-width: 80%; height: auto;"/>  
   <p><b>Table 2.</b> Ablation study.</p>
-  <p>Table 2 shows the data format at each step of the event compression. In the first step, the data is transformed from characters to integers. Secondly, Dictionary encoding separates timestamps with more bytes and an additional <i>id</i> value. Variable Encoding further splits the Non-Dictionary events. However, due to the small difference in timestamp size, the events remain the same length in bytes. The final three strategies allow for events to be smaller in bits, rather than bytes, resulting in a significant size reduction. Event distribution refers to the percentage of events that are either dictionary, long, or short events. Filesize is the expected size of an observation with 6,000,000 recorded values.The combination of all the strategies in files that are approximately $20\%$ of the original file size. This result is due to the hybrid approach between the dictionary and variable-length encoding.</p>
+  <p>Table 2 shows the data format at each step of the event compression. In the first step, the data is transformed from characters to integers. Secondly, Dictionary encoding separates timestamps with more bytes and an additional <i>id</i> value. Variable Encoding further splits the Non-Dictionary events. However, due to the small difference in timestamp size, the events remain the same length in bytes. The final three strategies allow for events to be smaller in bits, rather than bytes, resulting in a significant size reduction. Event distribution refers to the percentage of events that are either dictionary, long, or short events. Filesize is the expected size of an observation with 6,000,000 recorded values.The combination of all the strategies in files that are approximately 20% of the original file size. This result is due to the hybrid approach between the dictionary and variable-length encoding.</p>
 
 </div>
 </section>
@@ -375,7 +374,6 @@
   <div class="hero-body">
     <div class="container">
       <h2 class="title">Presentation</h2>
-
       <!-- TODO: Replace with your poster PDF -->
       <iframe  src="static/pdfs/Antonio_Junco_de_Haas_Thesis_Presentation.pdf" width="100%" height="550">
           </iframe>
@@ -399,7 +397,7 @@
       </div>
       <pre id="bibtex-code"><code>@article{event_compression,
   title={Event Camera Lossless Compression for Satellite Applications},
-  author={Antonio Junco de Haas and Sydney Dolan},
+  author={Antonio Junco de Haas},
   year={2025},
   url={https://sydneyid.github.io/event_compression/}
 }</code></pre>
@@ -426,11 +424,6 @@
   </div>
 </footer>
 
-<!-- Statcounter tracking code -->
-  
-<!-- You can add a tracker to track page visits by creating an account at statcounter.com -->
 
-    <!-- End of Statcounter Code -->
-
-  </body>
-  </html>
+</body>
+</html>
