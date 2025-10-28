@@ -360,8 +360,8 @@
 
   <img src="./static/images/ablation.png"
     class="center-image"
-    alt="Description . light hits the photoreceptor, which converts it to a voltage. voltage is carried to a change amplifier, which changes its intensity. Then the signal is carried to the comparatators, which convert input into events by comparing it against thresholds."
-    style="max-width: 80%; height: auto;"/>  
+    alt="Description . abaltion study of where each element and the resultant compression is calcualted."
+    style="max-width: 40%; height: auto;"/>  
   <p><b>Table 2.</b> Ablation study.</p>
   <p>Table 2 shows the data format at each step of the event compression. In the first step, the data is transformed from characters to integers. Secondly, Dictionary encoding separates timestamps with more bytes and an additional <i>id</i> value. Variable Encoding further splits the Non-Dictionary events. However, due to the small difference in timestamp size, the events remain the same length in bytes. The final three strategies allow for events to be smaller in bits, rather than bytes, resulting in a significant size reduction. Event distribution refers to the percentage of events that are either dictionary, long, or short events. Filesize is the expected size of an observation with 6,000,000 recorded values.The combination of all the strategies in files that are approximately 20% of the original file size. This result is due to the hybrid approach between the dictionary and variable-length encoding.</p>
 
